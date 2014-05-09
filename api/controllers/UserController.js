@@ -21,7 +21,52 @@ module.exports = {
    * Overrides for the settings in `config/controllers.js`
    * (specific to UserController)
    */
-  _config: {}
+  _config: {},
 
-  
+  create: function(req, res) {
+    User.create(req.body.user, function(err, model) {
+      if(err) return res.json({ err: err }, 500);
+      res.redirect('/welcome');
+    });
+  },
+
+  destroy: function(req, res) {
+
+  },
+
+  signup: function(req,res){
+    res.view();
+  },
+
+  login: function(req,res){
+    var bcrypt = require('bcrypt');
+
+    User.findOneByEmail(req.body.user.email).done(function (err, user) {
+      if (err) res.json({ error: 'DB error' }, 500);
+
+      if (user) {
+        bcrypt.compare(req.body.user.password, user.password, function (err, match) {
+          if (err) res.json({ error: 'Server error' }, 500);
+
+          if (match) {
+            // password match
+            req.session.user = user.id;
+            res.redirect('/welcome');
+          } else {
+            // invalid password
+            if (req.session.user) req.session.user = null;
+            res.json({ error: 'Invalid password' }, 400);
+          }
+        });
+      } else {
+        res.json({ error: 'User not found' }, 404);
+      }
+    });
+  },
+
+  logout: function(req,res){
+    req.session.user = null;
+    res.redirect('/');
+  }
+
 };

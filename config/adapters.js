@@ -27,12 +27,20 @@ module.exports.adapters = {
   // MySQL is the world's most popular relational database.
   // Learn more: http://en.wikipedia.org/wiki/MySQL
   myLocalMySQLDatabase: {
-
     module: 'sails-mysql',
     host : 'localhost',
     port : '3306',
     user : 'root',
     password : 'adslyw', 
     database : 'test'
+  },
+
+  oracleConfig:{
+    host : '130.84.1.112',
+    port : '1521',
+    user : 'sx_sl',
+    password : 'DW56H1XO',
+    database : 'bssbill1'
   }
+
 };

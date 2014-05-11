@@ -17,11 +17,11 @@
         <div class="container">          
           <nav>
             <ul class="nav navbar-nav navbar-left">
-              <a class="navbar-brand" href="/">ADSLYW</a>
+              <a class="navbar-brand" href="/">Adslyw</a>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li>
-              <%= if(res.session.user){ %>
+              <% if(session.user == null){ %>
               <a href="/login">
                 <span class="glyphicon glyphicon-log-in"></span> 
                 登录 

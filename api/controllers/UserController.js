@@ -26,7 +26,7 @@ module.exports = {
   create: function(req, res) {
     User.create(req.body.user, function(err, model) {
       if(err) return res.json({ err: err }, 500);
-      res.redirect('/welcome');
+      res.redirect('/login');
     });
   },
 
@@ -51,6 +51,7 @@ module.exports = {
           if (match) {
             // password match
             req.session.user = user.id;
+            req.session.authenticated = true;
             res.redirect('/welcome');
           } else {
             // invalid password
@@ -65,6 +66,7 @@ module.exports = {
   },
 
   logout: function(req,res){
+    req.session.authenticated = false;
     req.session.user = null;
     res.redirect('/');
   }

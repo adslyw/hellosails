@@ -59,6 +59,7 @@ module.exports = function (grunt) {
     // *->    put other dependencies here   <-*
     'linker/js/jquery.min.js',
     'linker/js/highcharts.js',
+    'jquery.metisMenu.js',
     // All of the rest of your app scripts imported here
     'linker/**/*.js'
   ];

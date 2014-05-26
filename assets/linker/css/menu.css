@@ -1,0 +1,14 @@
+#menu li, #menu a {
+    display: block;
+    text-decoration: none;
+}
+li > a {
+    color: #777;
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 10px 0px 10px 15px;
+}
+ul {
+    padding: 0px;
+    margin: 0px;
+    list-style: none outside none;
+}

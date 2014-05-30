@@ -1,0 +1,11 @@
+ <% _.each(users, function(user) { %>
+	<div class="media">
+	  <a class="pull-left" href="https://en.gravatar.com/avatar/<%= user.email %>.png?s=50">
+	    <img class="media-object" src="..." alt="...">
+	  </a>
+	  <div class="media-body">
+	    <h4 class="media-heading"><%= user.email %></h4>
+	    ...
+	  </div>
+	</div>
+ <% }) %>

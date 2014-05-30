@@ -16,13 +16,22 @@ module.exports.policies = {
 
   // Default policy for all controllers and actions
   // (`true` allows public access) 
-  '*': false,
+  '*': true,
   UserController:{
+  	'*'    : false,
   	 signup: true,
+  	 signin: true,
   	  login: true,
   	 create: true,
   	destroy: 'isAuthenticated',
   	 logout: 'isAuthenticated'
+  },
+  WelcomeController:{
+  	'*': false,
+  	'index': 'isAuthenticated'
+  },
+  UserController:{
+  	'*': true
   }
 
   /*

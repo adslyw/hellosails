@@ -41,10 +41,7 @@ module.exports.routes = {
     view: 'user/signup'
   },
   '/login':{
-    view: 'welcome/login'
-  },
-  '/welcome': {
-    view: 'welcome/index'
+    view: 'user/signin'
   },
   '/logout': 'UserController.logout'
   /*

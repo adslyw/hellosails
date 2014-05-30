@@ -35,9 +35,15 @@ module.exports = {
   },
 
   signup: function(req,res){
-    res.view();
+    return res.view({
+      layout: "different_layout"
+    });
   },
-
+  signin:function(req, res){
+    return res.view({
+      layout: "different_layout"
+    });
+  },
   login: function(req,res){
     var bcrypt = require('bcrypt');
 
@@ -69,6 +75,27 @@ module.exports = {
     req.session.authenticated = false;
     req.session.user = null;
     res.redirect('/');
+  },
+
+  index: function(req,res){
+    var crypto = require('crypto');
+    var shasum = crypto.createHash('sha1');
+    User.find().done(function(err,users){
+      if (err) res.json({ error: 'DB error' }, 500);
+      if (users){
+        _.each(users,function(user){
+          var email = _.first(_.values(_.pick(user,'email'))).toString();
+          console.log(email);
+          //console.log(shasum.update(email).digest('hex'));
+        })
+        return res.view({users: users});
+      }else{
+        res.json({ error: 'User not found' }, 404);
+      }
+    });
   }
 
 };
+ function emialHash(email){
+  
+ }

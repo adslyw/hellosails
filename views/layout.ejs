@@ -10,6 +10,7 @@
     <!--STYLES-->
     <link rel="stylesheet" href="/linker/css/bootstrap.css">
     <link rel="stylesheet" href="/linker/css/font-awesome.css">
+    <link rel="stylesheet" href="/linker/css/font-awesome.min.css">
     <link rel="stylesheet" href="/linker/css/loginform.css">
     <link rel="stylesheet" href="/linker/css/menu.css">
     <link rel="stylesheet" href="/linker/css/style.css">
@@ -52,16 +53,19 @@
         </ul>  
       </div>
     </nav>
-    <div>
+    <div> 
+    <% if(session.user != null){ %>   
     <div class="col-md-2">
       <%- partial('partials/menu') %>
     </div>
     <div class="col-md-8">
       <%- body %>
     </div>
-    <div class="col-md-2">
-      
+    <div class="col-md-2">      
     </div>
+    <% }else{ %>
+      <%- body %>       
+    <% } %>
     <!-- Bring in the socket.io client -->
     <script type="text/javascript" src="/js/socket.io.js"></script>
     <!-- then beef it up with some convenience logic for talking to Sails.js -->

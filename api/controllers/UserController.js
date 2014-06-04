@@ -78,17 +78,16 @@ module.exports = {
   },
 
   index: function(req,res){
-    var crypto = require('crypto');
-    var shasum = crypto.createHash('sha1');
+    var md5 = require('MD5');   
+    var userlists = [] ;
     User.find().done(function(err,users){
       if (err) res.json({ error: 'DB error' }, 500);
       if (users){
         _.each(users,function(user){
-          var email = _.first(_.values(_.pick(user,'email'))).toString();
-          console.log(email);
-          //console.log(shasum.update(email).digest('hex'));
+          var email = _.first(_.values(_.pick(user,'email'))).toString(); 
+          userlists.push(_.extend(user, {emailHash: md5(email)}));
         })
-        return res.view({users: users});
+        return res.view({users: userlists});
       }else{
         res.json({ error: 'User not found' }, 404);
       }

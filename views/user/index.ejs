@@ -1,7 +1,7 @@
  <% _.each(users, function(user) { %>
 	<div class="media">
-	  <a class="pull-left" href="https://en.gravatar.com/avatar/<%= user.emailHash %>.png?s=50">
-	    <img class="media-object" src="https://en.gravatar.com/avatar/<%= user.emailHash %>.png?s=50" alt="...">
+	  <a class="pull-left" href="https://en.gravatar.com/avatar/<%= user.emailHash %>.png?s=200">
+	    <img class="media-object" src="https://en.gravatar.com/avatar/<%= user.emailHash %>.png?s=80" alt="...">
 	  </a>
 	  <div class="media-body">
 	    <h4 class="media-heading"><%= user.email %></h4>
@@ -9,3 +9,7 @@
 	  </div>
 	</div>
  <% }) %>
+<ul class="pager">
+  <li class="previous"><a href="?page=<%= parseInt(req.param('page')) -1 %>">&larr; Older</a></li>
+  <li class="next"><a href="?page=<%= parseInt(req.param('page')) + 1 %>">Newer &rarr;</a></li>
+</ul>

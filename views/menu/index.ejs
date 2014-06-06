@@ -1,0 +1,65 @@
+<div class="panel panel-default">
+  <div class="panel-heading"><i class="fa fa-edit"></i>&nbsp;New Menuitem</div>
+  <div class="panel-body">
+    <form class="form-horizontal" accept-charset="UTF-8" action="/menu/create" method="post" role="form">
+      <div class="form-group">
+        <label for="title" class="control-label col-lg-2">Icon</label>
+        <div class="col-lg-8">
+          <input type="text" id="menu_icon" name="menu[icon]"  class="form-control">
+        </div>
+      </div> 
+      <div class="form-group">
+        <label for="title" class="control-label col-lg-2">Title</label>
+        <div class="col-lg-8">
+          <input type="text" id="menu_title" name="menu[title]"  class="form-control">
+        </div>
+      </div> 
+      <div class="form-group">
+        <label for="title" class="control-label col-lg-2">Parent ID</label>
+        <div class="col-lg-8">
+          <input type="text" id="menu_parent" name="menu[parent]"  class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="title" class="control-label col-lg-2">Path</label>
+        <div class="col-lg-8">
+          <input type="text" id="menu_path" name="menu[path]"  class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="title" class="control-label col-lg-2">Level</label>
+        <div class="col-lg-8">
+          <input type="text" id="menu_level" name="menu[level]"  class="form-control">
+        </div>
+      </div> 
+      <div class="form-group">
+        <label for="title" class="control-label col-lg-2"></label>
+        <div class="col-lg-8">
+          <input class="btn btn-default btn-info" name="commit" type="submit" value="Add" />
+        </div>
+      </div>          
+    </form>
+  </div> 
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading"><i class="fa fa-edit"></i>&nbsp;Menu lists</div>
+  <div class="panel-body">
+    <% _.each(_.where(menulist,{level: 1}), function(menu) { %>
+    <ul class='list-group'>
+	  <li class="list-group-item"> 
+        <span class="link-title">ID:&nbsp;<%= menu.id %></span>  
+	      <i class="fa fa-<%= menu.icon %>"></i>
+	      <span class="link-title">&nbsp;<%= menu.title %></span> 
+	  	  <span class="link-title">ParentID:&nbsp;<%= menu.parent %></span>
+        <span class="link-title">Path:&nbsp;<%= menu.path %></span> 
+        <span class="link-title">Level:&nbsp;<%= menu.level %></span>
+	  </li>
+	</ul>
+	<% }) %>
+  </div> 
+</div>
+
+
+
+                    

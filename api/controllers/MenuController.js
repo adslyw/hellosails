@@ -31,7 +31,11 @@ module.exports = {
     });
     
   },
-
+  show: function(req, res) {
+    Menu.find().exec(function(err, menulist) {
+      return res.view({menulist: menulist});
+    });
+  },
 
   /**
    * Action blueprints:

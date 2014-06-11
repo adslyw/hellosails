@@ -45,20 +45,33 @@
 <div class="panel panel-default">
   <div class="panel-heading"><i class="fa fa-edit"></i>&nbsp;Menu lists</div>
   <div class="panel-body">
-    <% _.each(_.where(menulist,{level: 1}), function(menu) { %>
-    <ul class='list-group'>
-	  <li class="list-group-item"> 
-        <span class="link-title">ID:&nbsp;<%= menu.id %></span>  
-	      <i class="fa fa-<%= menu.icon %>"></i>
-	      <span class="link-title">&nbsp;<%= menu.title %></span> 
-	  	  <span class="link-title">ParentID:&nbsp;<%= menu.parent %></span>
-        <span class="link-title">Path:&nbsp;<%= menu.path %></span> 
-        <span class="link-title">Level:&nbsp;<%= menu.level %></span>
-	  </li>
-	</ul>
-	<% }) %>
+      <% _.each(_.where(menulist,{level: 1}), function(menu) { %>
+      <ul class="list-group">
+        <li class="list-group-item"> 
+            <span class="link-title">ID:&nbsp;<%= menu.id %></span>  
+            <i class="fa fa-<%= menu.icon %>"></i>
+            <span class="link-title">&nbsp;<%= menu.title %></span> 
+            <span class="link-title">ParentID:&nbsp;<%= menu.parent %></span>
+            <span class="link-title">Path:&nbsp;<%= menu.path %></span> 
+            <span class="link-title">Level:&nbsp;<%= menu.level %></span>
+        </li>
+        <% _.each(_.where(menulist,{parent: menu.id}), function(submenu) { %>
+          <ul class="list-group">
+            <li class="list-group-item"> 
+                <span class="link-title">ID:&nbsp;<%= submenu.id %></span>  
+                <i class="fa fa-<%= submenu.icon %>"></i>
+                <span class="link-title">&nbsp;<%= submenu.title %></span> 
+                <span class="link-title">ParentID:&nbsp;<%= submenu.parent %></span>
+                <span class="link-title">Path:&nbsp;<%= submenu.path %></span> 
+                <span class="link-title">Level:&nbsp;<%= submenu.level %></span>
+            </li>
+          </ul>
+        <% }) %>
+      </ul>
+    <% }) %>
   </div> 
 </div>
+
 
 
 

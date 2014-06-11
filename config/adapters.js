@@ -33,14 +33,6 @@ module.exports.adapters = {
     user : 'root',
     password : 'adslyw', 
     database : 'test'
-  },
-
-  oracleConfig:{
-    host : '130.84.1.112',
-    port : '1521',
-    user : 'sx_sl',
-    password : 'DW56H1XO',
-    database : 'bssbill1'
   }
 
 };

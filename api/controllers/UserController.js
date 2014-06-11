@@ -81,7 +81,7 @@ module.exports = {
     var md5 = require('MD5');   
     var userlists = [] ;
     var page_size =  6;
-     User.find().paginate({page: req.param('page'), limit: page_size}).done(function(err,users){
+     User.find().paginate({page: req.param('page'|| 1), limit: page_size}).done(function(err,users){
       if (err) res.json({ error: 'DB error' }, 500);
       if (users){
         _.each(users,function(user){

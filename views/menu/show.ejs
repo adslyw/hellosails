@@ -1,0 +1,26 @@
+<ul id="menu" class="">
+  <% _.each(_.where(menulist,{level: 1}), function(menu) { %>
+    <li class="nav-divider"></li>
+      <li class="">
+        <a href="<%= menu.path %>">
+          <i class="fa fa-<%= menu.icon %>"></i>
+          <span class="link-title">&nbsp;<%= menu.title %></span>
+          <% if(!_.isEmpty(_.where(menulist,{parent: menu.id}))) { %>
+            <span class="fa arrow"></span>
+            </a>
+            <ul>
+              <% _.each(_.where(menulist,{parent: menu.id}), function(submenu) { %>
+                <li class="">
+                  <a href="<%= submenu.path %>">
+                    <i class="fa fa-<%= submenu.icon %>"></i>&nbsp;<%= submenu.title %>
+                  </a> 
+                </li>
+              <% }) %>
+            </ul>
+        </li>
+          <% }else{ %>
+        </a> 
+        <% } %>
+  <% }) %>
+</ul>
+

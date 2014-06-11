@@ -54,7 +54,6 @@ module.exports.views = {
   layout: 'layout'
 
 
-
   // Using Multiple Layouts with EJS
   //
   // If you're using the default engine, `ejs`, Sails supports the use of multiple
@@ -67,6 +66,5 @@ module.exports.views = {
   // 
   // But you might override that in some of your controllers with:
   // layout: 'layouts/internal'
-
 
 };

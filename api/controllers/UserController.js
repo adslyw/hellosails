@@ -96,6 +96,3 @@ module.exports = {
   }
 
 };
- function emialHash(email){
-  
- }

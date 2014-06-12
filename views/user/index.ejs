@@ -10,6 +10,10 @@
 	</div>
  <% }) %>
 <ul class="pager">
-  <li class="previous"><a href="?page=<%= parseInt(req.param('page')) -1 %>">&larr; Older</a></li>
+  <% if(parseInt(req.param('page')) > 2) { %>
+  	<li class="previous"><a href="?page=<%= parseInt(req.param('page')) -1 %>">&larr; Older</a></li>
+  <% }else{ %>
+  	<li class="previous"><a href="?page=1">&larr; Older</a></li>
+  <% } %>
   <li class="next"><a href="?page=<%= parseInt(req.param('page')) + 1 %>">Newer &rarr;</a></li>
 </ul>

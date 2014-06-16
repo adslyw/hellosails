@@ -28,7 +28,7 @@ module.exports = {
      var oracle = require('oracle');  
      oracle.connect(sails.config.OracleConfig, function(err, connection) {
       if (err) { console.log("Error connecting to db:", err); return; }
-      connection.execute("SELECT systimestamp FROM dual", [], function(err, results) {
+      connection.execute("select systimestamp from dual", [], function(err, results) {
           if (err) { console.log("Error executing query:", err); return; }
           return res.json({results: results[0]});
           connection.close(); // call only when query is finished executing
@@ -75,7 +75,7 @@ module.exports = {
             if (err) { 
               return res.json({error: {messagse: 'Error to make dblink!'}}); 
             }
-            return res.json({results: results[0]});                    
+            return res.json({success: {message: 'Database link successfully created!'}});                    
             });
           }
           connection.close(); // call only when query is finished executing

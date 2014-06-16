@@ -55,8 +55,7 @@
             <span class="link-title">Path:&nbsp;<%= menu.path %></span> 
             <span class="link-title">Level:&nbsp;<%= menu.level %></span>
         </li>
-        <% _.each(_.where(menulist,{parent: menu.id}), function(submenu) { %>
-          <ul class="list-group">
+        <% _.each(_.where(menulist,{parent: menu.id}), function(submenu) { %>          
             <li class="list-group-item"> 
                 <span class="link-title">ID:&nbsp;<%= submenu.id %></span>  
                 <i class="fa fa-<%= submenu.icon %>"></i>
@@ -64,8 +63,7 @@
                 <span class="link-title">ParentID:&nbsp;<%= submenu.parent %></span>
                 <span class="link-title">Path:&nbsp;<%= submenu.path %></span> 
                 <span class="link-title">Level:&nbsp;<%= submenu.level %></span>
-            </li>
-          </ul>
+            </li>       
         <% }) %>
       </ul>
     <% }) %>

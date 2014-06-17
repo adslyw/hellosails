@@ -46,6 +46,7 @@
 		<th>Status</th>
 		<th>CreatedAt</th>
 		<th>UpdatedAt</th>
+    <th></th>
   	</tr>
     <% _.each(qlist, function (item) { %>
 	    <tr>
@@ -55,6 +56,8 @@
 		    <td><%= item.state %></td>
 		    <td><%= item.createdAt %></td>
 		    <td><%= item.updatedAt %></td>
+        <td><a class="btn btn-primary" href="/qs/run/<%= item.id %>">Run</a></td> 
+        <td><a class="btn btn-warning" href="/qs/delete/<%= item.id %>">Delete</a></td>       
 	    </tr>
     <% }) %>
   </table>

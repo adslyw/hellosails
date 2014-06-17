@@ -36,6 +36,30 @@ module.exports = {
       if(err) return res.json({ err: err }, 500);
       res.redirect('/qs');
     });
+  },
+  run:  function(req, res){
+    var oracle = require('oracle');  
+    oracle.connect(sails.config.OracleConfig, function(err, connection) {
+      if (err) { console.log("Error connecting to db:", err); return; }
+      Qs.find().where({id: req.param('id')}).exec(function(err,qs){
+        if(err){
+         return res.json({flash: {typy: error, message: 'Error to find query string!'}})
+        }
+        connection.execute(qs[0].sqlstring, [], function(err, results) {
+            if (err) { console.log("Error executing query:", err); return; }
+            return res.json({results: results});
+            connection.close(); // call only when query is finished executing
+        });
+      });      
+    });
+  },
+  delete: function(req,res){
+    Qs.destroy().where({id: req.param('id')}).exec(function(err, list) {
+      if(err) {
+        return res.json({ err: err }, 500);
+      }
+      res.redirect('/qs');
+    }); 
   }
 
   

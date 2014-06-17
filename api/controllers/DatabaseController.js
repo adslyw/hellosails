@@ -28,10 +28,10 @@ module.exports = {
      var oracle = require('oracle');  
      oracle.connect(sails.config.OracleConfig, function(err, connection) {
       if (err) { console.log("Error connecting to db:", err); return; }
-      connection.execute("select systimestamp from dual", [], function(err, results) {
-          if (err) { console.log("Error executing query:", err); return; }
+        connection.execute("select systimestamp from dual", [], function(err, results) {
+        if (err) { console.log("Error executing query:", err); return; }
           return res.json({results: results[0]});
-          connection.close(); // call only when query is finished executing
+        connection.close(); // call only when query is finished executing
       });
     });    
   },
@@ -39,11 +39,17 @@ module.exports = {
     var oracle = require('oracle');  
      oracle.connect(sails.config.OracleConfig, function(err, connection) {
       if (err) { console.log("Error connecting to db:", err); return; }
-      connection.execute("select * from sync_bill2bcv_t", [], function(err, results) {
+      Qs.find().where({id: 6}).exec(function(err,qs){
+      if(err){
+       return res.json({flash: {typy: error, message: 'Error to find query string!'}})
+      }
+      connection.setPrefetchRowCount(50);
+      connection.execute(qs[0].sqlstring, [], function(err, results) {
           if (err) { console.log("Error executing query:", err); return; }
           return res.json({results: results[0]});
           connection.close(); // call only when query is finished executing
       });
+    });      
     }); 
   },
   // dblink_exist :function(req, res){
@@ -82,8 +88,31 @@ module.exports = {
       });
     }); 
   },
-
-
+  test:  function(req,res){
+    Qs.find().where({id: 4}).exec(function(err,results){
+      if(err){
+       return res.json({flash: {typy: error, message: 'Error to find query string!'}})
+      }
+      console.log(results[0].sqlstring);
+      return res.json({results: results});
+    });
+  },
+  run:  function(req, res){
+    var oracle = require('oracle');  
+     oracle.connect(sails.config.OracleConfig, function(err, connection) {
+      if (err) { console.log("Error connecting to db:", err); return; }
+      Qs.find().where({id: req.param('id')}).exec(function(err,qs){
+      if(err){
+       return res.json({flash: {typy: error, message: 'Error to find query string!'}})
+      }
+      connection.execute(qs[0].sqlstring, [], function(err, results) {
+          if (err) { console.log("Error executing query:", err); return; }
+          return res.json({results: results[0]});
+          connection.close(); // call only when query is finished executing
+      });
+    });      
+    });
+  },
   /**
    * Overrides for the settings in `config/controllers.js`
    * (specific to DatabaseController)

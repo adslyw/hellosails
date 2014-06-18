@@ -33,20 +33,25 @@ module.exports = {
   },
   create: function(req,res){
       Qs.create(req.body.qs, function(err, model) {
-      if(err) return res.json({ err: err }, 500);
+      if(err){
+        req.flash('danger','Data unsuccessfully added!'); return;
+      }
+      req.flash('success','Data successfully added!');
       res.redirect('/qs');
     });
   },
   run:  function(req, res){
     var oracle = require('oracle');  
     oracle.connect(sails.config.OracleConfig, function(err, connection) {
-      if (err) { console.log("Error connecting to db:", err); return; }
+      if (err) { 
+        req.flash('danger','Error in connecting to database!'); return;
+      }
       Qs.find().where({id: req.param('id')}).exec(function(err,qs){
         if(err){
-         return res.json({flash: {typy: error, message: 'Error to find query string!'}})
+          req.flash('danger','Error to find query string!'); return;         
         }
         connection.execute(qs[0].sqlstring, [], function(err, results) {
-            if (err) { console.log("Error executing query:", err); return; }
+            if (err) { req.flash('danger','Error to executing query!'); return; }
             return res.json({results: results});
             connection.close(); // call only when query is finished executing
         });
@@ -56,8 +61,9 @@ module.exports = {
   delete: function(req,res){
     Qs.destroy().where({id: req.param('id')}).exec(function(err, list) {
       if(err) {
-        return res.json({ err: err }, 500);
+        req.flash('danger','Error to  delete!'); return;
       }
+      req.flash('success','Successfully deleted!');
       res.redirect('/qs');
     }); 
   }

@@ -61,7 +61,13 @@
     <div class="col-md-8">
       <%- body %>
     </div>
-    <div class="col-md-2">      
+    <div class="col-md-2"> 
+      <% _.each(_.pairs(req.flash()),function(item){ %>
+        <div class="alert alert-<%= item[0] %> alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <%= item[1] %>
+        </div>
+      <% }); %>     
     </div>
     <% }else{ %>
       <%- body %>       
